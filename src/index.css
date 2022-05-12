@@ -16,8 +16,8 @@ code {
 }
 
 .page_one {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	align-items: center;
 	max-width: 500px;
 	width: 100%;

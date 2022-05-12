@@ -1,4 +1,5 @@
 import { useUserContext } from "../contexts/user";
+import { Link } from "react-router-dom";
 
 const TopHeader = () => {
 	const { name } = useUserContext();
@@ -6,8 +7,10 @@ const TopHeader = () => {
 		<div className="top_header">
 			<span id="heading">Simple ToDo</span>
 			<div className="right_header">
-				<span>Ms {name}</span>
-				<a href="/">LogOut</a>
+				<span>I am  {name}</span>
+				<Link to={`/`} activeClassName="back">
+					<span>Logout</span>
+				</Link>
 			</div>
 		</div>
 	);

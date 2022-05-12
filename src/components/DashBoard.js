@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import List from "./List";
 import TopHeader from "./TopHeader";
 
@@ -8,7 +9,9 @@ const DashBoard = () => {
 			<div className="todos">
 				<div className="top_bar">
 					<span>My ToDos</span>
-					<a href="/createform">Create New</a>
+					<Link to={`/createform`} activeClassName="createNew">
+					<span>Create New</span>
+				</Link>
 				</div>
 				<List />
 			</div>

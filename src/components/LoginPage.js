@@ -31,7 +31,7 @@ const LoginPage = () => {
                             required
 						/>
 					</label>
-					<span>Name is required</span>
+					{check && <p>Name is required</p>}
 				</div>
 				<button type="submit" className="btn btn-primary">
 					Next
