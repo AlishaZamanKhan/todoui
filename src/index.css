@@ -78,6 +78,10 @@ input:invalid ~ .page_one span {
 	display: block;
 }
 
+.required{
+	color: red;
+}
+
 .top_header {
 	display: flex;
 	justify-content: space-between;

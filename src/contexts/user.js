@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-const initialState = { name: null,  toDoList: [
-    {id: 1,  title: "some todo title",  description: "some desc"},
-    {id: 2,  title: "some todo title",  description: "some desc"},
-    {id: 3,  title: "some todo title",  description: "some desc"}
-    ]};
-    
+const initialState = {
+	name: null,
+	toDoList: [
+		{
+			id: 1,
+			title: "some todo title",
+			description: "some desc",
+			isDone: false,
+		},
+		{
+			id: 2,
+			title: "some todo title",
+			description: "some desc",
+			isDone: false,
+		},
+		{
+			id: 3,
+			title: "some todo title",
+			description: "some desc",
+			isDone: false,
+		},
+	],
+};
+
 const UserContext = React.createContext({
 	...initialState,
 	setName: () => {},
@@ -15,22 +34,48 @@ const UserContext = React.createContext({
 export function MyProvider({ children }) {
 	const [state, updateState] = useState(initialState);
 
-    const setName = (newValue) => {
-        updateState({...state, name: newValue})
+	const setName = (newValue) => {
+		updateState({ ...state, name: newValue });
+	};
+
+	const setToDoList = (newValue) => {
+		const array = [...state.toDoList];
+		array.push(newValue);
+		updateState({ ...state, toDoList: array });
+	};
+
+	const updateTodo = (todo) => {
+		const newList = state.toDoList;
+		for (let i in newList) {
+			if (newList[i].id === todo.id) {
+				newList[i] = todo;
+				break;
+			}
+		}
+		updateState({ ...state, toDoList: newList });
+	};
+    const navigate = useNavigate();
+
+	const logout = () => {
+        const array = [];
+        updateState({...state, toDoList: array});
+        setName('');
+        navigate('/');
+    };
+
+    const setInitialTodo = () => {
+        updateState({...state, toDoList: initialState.toDoList})
     }
 
-    const setToDoList = (newValue) => {
-        const array = [...state.toDoList];
-        array.push(newValue);
-        updateState({...state, toDoList: array})
-    }
 	return (
-		<UserContext.Provider value={{ ...state , setName, setToDoList}}>{children}</UserContext.Provider>
+		<UserContext.Provider
+			value={{ ...state, setName, setToDoList, updateTodo, logout, setInitialTodo}}
+		>
+			{children}
+		</UserContext.Provider>
 	);
 }
 
 export const useUserContext = () => useContext(UserContext);
 
 export default UserContext;
-
-

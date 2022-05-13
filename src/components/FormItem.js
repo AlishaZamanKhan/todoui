@@ -18,7 +18,7 @@ const FormItem = () => {
 				createdOn: new Date().toUTCString(),
 			});
 			e.target.reset();
-			// navigate("/dashboard");
+			navigate("/dashboard");
 		}
 	};
 

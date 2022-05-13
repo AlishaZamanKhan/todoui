@@ -1,19 +1,20 @@
 import { useUserContext } from "../contexts/user";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-	const { name, setName } = useUserContext();
+	const { name, setName, setInitialTodo } = useUserContext();
 	const navigate = useNavigate();
-
+	const [check, setCheck] = useState(true);
 	const handleChange = (event) => {
 		setName(event.target.value);
 	};
 
 	const handleSubmit = () => {
+		setInitialTodo();
 		navigate("/dashboard");
 		console.log(name);
 	};
-	const check = true;
 
 	return (
 		<div className="page_one">
@@ -28,10 +29,10 @@ const LoginPage = () => {
 							id="username"
 							placeholder="Enter name"
 							pattern="[A-Za-z0-9]{1,20}"
-                            required
+							required
 						/>
 					</label>
-					{check && <p>Name is required</p>}
+				 <p className={check}>Name is required</p>
 				</div>
 				<button type="submit" className="btn btn-primary">
 					Next
