@@ -13,7 +13,6 @@ const LoginPage = () => {
 	const handleSubmit = () => {
 		setInitialTodo();
 		navigate("/dashboard");
-		console.log(name);
 	};
 
 	return (
@@ -32,7 +31,7 @@ const LoginPage = () => {
 							required
 						/>
 					</label>
-				 <p className={check}>Name is required</p>
+				 {/* <p className={check}>Name is required</p> */}
 				</div>
 				<button type="submit" className="btn btn-primary">
 					Next

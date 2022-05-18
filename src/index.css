@@ -82,6 +82,7 @@ input:invalid ~ .page_one span {
 	color: red;
 }
 
+
 .top_header {
 	display: flex;
 	justify-content: space-between;
@@ -111,7 +112,16 @@ input:invalid ~ .page_one span {
 
 .top_bar span {
 	padding: 10px 20px;
-	margin-right: px;
+	margin-right: 100px;
+}
+
+.top_bar  #create_new {
+    color:rgb(38, 38, 252);
+}
+
+.top_bar  #create_new:hover {
+     color: darkblue;
+    cursor: pointer;
 }
 
 .todos {
@@ -123,10 +133,42 @@ input:invalid ~ .page_one span {
 	margin: 20px;
 }
 
+.createForm{
+	margin: 20px;
+}
+
+
+.todoTitle {
+display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.todoTitle span {
+	padding: 10px 10px;
+    margin-right: 10px;
+	
+}
+
+.todoTitle  #go_back {
+    color:rgb(38, 38, 252);
+    margin-right: 700px;
+}
+
+.todoTitle  #go_back:hover {
+     color: darkblue;
+     margin-right: 100px;
+    cursor: pointer;
+}
+
+
+
 ul li {
 	list-style: none;
 	border: 1px solid #ccc;
-	margin: 10px 100px;
+	margin: 10px 180px 10px 100px;
 	padding: 10px 50px;
 	border-radius: 7px;
 	display: flex;
@@ -148,9 +190,7 @@ ul li input {
 	color: rgb(5, 5, 45);
 }
 
-.createForm {
-	padding: 100px;
-}
+
 
 .todoTitle {
 	height: 100%;
@@ -168,5 +208,19 @@ ul li input {
 }
 
 .footer p {
-	padding: 100px 550px;
+	padding: 70px 550px;
 }
+
+ul li button,
+  .row button{
+    border: none;
+    outline: none;
+    color: white;
+    background: orange;
+    padding: 5px 15px;
+    cursor: pointer;
+  }
+
+  .createForm form{
+      margin: 10px 100px;
+  }

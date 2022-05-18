@@ -12,16 +12,8 @@ const List = () => {
 	return (
 		<div className="list">
 			<ul>
-				{toDoList.map((toDo, index) => {
-					return (
-						<li key={index}>
-							<label htmlFor="" className={toDo.isDone ? "active" : "deactive"}>
-								{console.log(toDo.isDone)}
-								{index + 1}. {toDo.title}
-							</label>
-							<input type="checkbox" id="" onClick={() => isFinished(toDo)} />
-						</li>
-					);
+				{toDoList.map((todo, index) => {
+					return <ListItem todo={todo} id={index} handleCheck = {isFinished}/>;
 				})}
 			</ul>
 		</div>

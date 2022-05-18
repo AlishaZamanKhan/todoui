@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -54,22 +54,39 @@ export function MyProvider({ children }) {
 		}
 		updateState({ ...state, toDoList: newList });
 	};
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const logout = () => {
-        const array = [];
-        updateState({...state, toDoList: array});
-        setName('');
-        navigate('/');
-    };
+		const array = [];
+		updateState({ ...state, toDoList: array });
+		updateState({ ...state, name: "" });
 
-    const setInitialTodo = () => {
-        updateState({...state, toDoList: initialState.toDoList})
-    }
+		navigate("/");
+	};
+
+	const setInitialTodo = () => {
+		updateState({ ...state, toDoList: initialState.toDoList });
+	};
+
+	useEffect(() => {
+		const todoStore = JSON.parse(localStorage.getItem("todoStore"));
+		if (todoStore) updateState(todoStore);
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem("todoStore", JSON.stringify(initialState));
+	}, [initialState]);
 
 	return (
 		<UserContext.Provider
-			value={{ ...state, setName, setToDoList, updateTodo, logout, setInitialTodo}}
+			value={{
+				...state,
+				setName,
+				setToDoList,
+				updateTodo,
+				logout,
+				setInitialTodo,
+			}}
 		>
 			{children}
 		</UserContext.Provider>
