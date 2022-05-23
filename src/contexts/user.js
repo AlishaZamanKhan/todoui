@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
 const initialState = {
 	name: null,
@@ -38,9 +39,13 @@ export function MyProvider({ children }) {
 		updateState({ ...state, name: newValue });
 	};
 
+	// id: state.toDoList.length > 0 ? state.toDoList[state.toDoList.length - 1 ].id + 1 : 1
+
 	const setToDoList = (newValue) => {
+		const unique_id = uuid();
+
 		const array = [...state.toDoList];
-		array.push({id: state.toDoList.length + 1, ...newValue});
+		array.push({ id: unique_id, ...newValue });
 		updateState({ ...state, toDoList: array });
 	};
 
@@ -71,10 +76,10 @@ export function MyProvider({ children }) {
 	const getInfo = (id) =>
 		state.toDoList.find((todo) => todo.id.toString() === id.toString());
 
-    const deleteTodo = (todo) => {
-        const newList = [...state.toDoList].filter((item) => item.id !== todo.id);
-        updateState({...state, toDoList: newList})
-    }
+	const deleteTodo = (todo) => {
+		const newList = [...state.toDoList].filter((item) => item.id !== todo.id);
+		updateState({ ...state, toDoList: newList });
+	};
 
 	useEffect(() => {
 		const todoStore = JSON.parse(localStorage.getItem("todoStore"));
@@ -95,7 +100,7 @@ export function MyProvider({ children }) {
 				logout,
 				setInitialTodo,
 				getInfo,
-                deleteTodo
+				deleteTodo,
 			}}
 		>
 			{children}
