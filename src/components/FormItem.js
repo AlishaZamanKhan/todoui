@@ -4,6 +4,7 @@ import { useUserContext } from "../contexts/user";
 const FormItem = () => {
 	const { setToDoList } = useUserContext();
 	const navigate = useNavigate();
+    
 
 	const handleAdd = (e) => {
 		e.preventDefault();
@@ -11,11 +12,16 @@ const FormItem = () => {
 		const formData = new FormData(e.target);
 		console.log("---Form---", formData);
 
+        const data = new Date().toUTCString();
+        
+
 		if (formData.get("title") !== null) {
 			setToDoList({
+               
 				title: formData.get("title"),
 				description: formData.get("description"),
-				createdOn: new Date().toUTCString(),
+                isDone: false,
+				createdOn: new Date().toUTCString()
 			});
 			e.target.reset();
 			navigate("/dashboard");

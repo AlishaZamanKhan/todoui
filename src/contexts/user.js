@@ -40,7 +40,7 @@ export function MyProvider({ children }) {
 
 	const setToDoList = (newValue) => {
 		const array = [...state.toDoList];
-		array.push(newValue);
+		array.push({id: state.toDoList.length + 1, ...newValue});
 		updateState({ ...state, toDoList: array });
 	};
 
@@ -68,6 +68,14 @@ export function MyProvider({ children }) {
 		updateState({ ...state, toDoList: initialState.toDoList });
 	};
 
+	const getInfo = (id) =>
+		state.toDoList.find((todo) => todo.id.toString() === id.toString());
+
+    const deleteTodo = (todo) => {
+        const newList = [...state.toDoList].filter((item) => item.id !== todo.id);
+        updateState({...state, toDoList: newList})
+    }
+
 	useEffect(() => {
 		const todoStore = JSON.parse(localStorage.getItem("todoStore"));
 		if (todoStore) updateState(todoStore);
@@ -86,6 +94,8 @@ export function MyProvider({ children }) {
 				updateTodo,
 				logout,
 				setInitialTodo,
+				getInfo,
+                deleteTodo
 			}}
 		>
 			{children}

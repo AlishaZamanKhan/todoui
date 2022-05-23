@@ -4,6 +4,7 @@ import DashBoard from "./components/DashBoard";
 import Footer from "./components/Footer";
 import LoginPage from "./components/LoginPage";
 import { MyProvider } from "./contexts/user";
+import EditForm from "./components/EditForm";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 					<Route path="/" element={<LoginPage />} />
 					<Route path="/dashboard" element={<DashBoard />} />
 					<Route path="/createform" element={<CreateForm />} />
+					<Route path={`/task/:taskId`} element={<EditForm />} />
 				</Routes>
 			</MyProvider>
 			<Footer />
