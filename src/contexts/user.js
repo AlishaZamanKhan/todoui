@@ -2,38 +2,66 @@ import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import axiosInstance from "../axios";
+
+
+const getData = async() =>{
+    const response = await axiosInstance.get("/users")
+    return response.data.todos;
+}
 
 const initialState = {
 	name: null,
-	toDoList: [
-		{
-			id: 1,
-			title: "some todo title",
-			description: "some desc",
-			isDone: false,
-		},
-		{
-			id: 2,
-			title: "some todo title",
-			description: "some desc",
-			isDone: false,
-		},
-		{
-			id: 3,
-			title: "some todo title",
-			description: "some desc",
-			isDone: false,
-		},
-	],
+	toDoList: axiosInstance.get("/users")
+    // [
+	// 	{
+	// 		id: 1,
+	// 		title: "some todo title",
+	// 		description: "some desc",
+	// 		isDone: false,
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		title: "some todo title",
+	// 		description: "some desc",
+	// 		isDone: false,
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		title: "some todo title",
+	// 		description: "some desc",
+	// 		isDone: false,
+	// 	},
+	// ],
 };
+
+
+
+
 
 const UserContext = React.createContext({
 	...initialState,
 	setName: () => {},
 });
 
+
+
+
 export function MyProvider({ children }) {
 	const [state, updateState] = useState(initialState);
+
+    // useEffect(() => {
+    //     const getData = async() =>{
+    //         const response = await 
+    //         console.log("response-----", response);
+    //         const data = response.data.todos;
+    //     updateState({ ...state, toDoList: })
+    //     }
+
+       
+    // }, [])
+
+   
 
 	const setName = (newValue) => {
 		updateState({ ...state, name: newValue });
@@ -41,13 +69,14 @@ export function MyProvider({ children }) {
 
 	// id: state.toDoList.length > 0 ? state.toDoList[state.toDoList.length - 1 ].id + 1 : 1
 
+
 	const setToDoList = (newValue) => {
 		const unique_id = uuid();
-
 		const array = [...state.toDoList];
 		array.push({ id: unique_id, ...newValue });
 		updateState({ ...state, toDoList: array });
 	};
+
 
 	const updateTodo = (todo) => {
 		const newList = state.toDoList;
@@ -81,14 +110,14 @@ export function MyProvider({ children }) {
 		updateState({ ...state, toDoList: newList });
 	};
 
-	useEffect(() => {
-		const todoStore = JSON.parse(localStorage.getItem("todoStore"));
-		if (todoStore) updateState(todoStore);
-	}, []);
+	// useEffect(() => {
+	// 	const todoStore = JSON.parse(localStorage.getItem("todoStore"));
+	// 	if (todoStore) updateState(todoStore);
+	// }, []);
 
-	useEffect(() => {
-		localStorage.setItem("todoStore", JSON.stringify(initialState));
-	}, [initialState]);
+	// useEffect(() => {
+	// 	localStorage.setItem("todoStore", JSON.stringify(initialState));
+	// }, [initialState]);
 
 	return (
 		<UserContext.Provider

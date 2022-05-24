@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import LoginPage from "./components/LoginPage";
 import { MyProvider } from "./contexts/user";
 import EditForm from "./components/EditForm";
+import DataTable from "./components/DataTable";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 					<Route path={`/task/:taskId`} element={<EditForm />} />
 				</Routes>
 			</MyProvider>
+        
 			<Footer />
 		</div>
 	);

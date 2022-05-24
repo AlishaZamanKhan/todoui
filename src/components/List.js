@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import EditForm from "./EditForm";
 import { confirm } from "react-confirm-box";
 
-const List = () => {
+const List = ({todos}) => {
 	const { name, toDoList, setToDoList, updateTodo, deleteTodo } =
 		useUserContext();
-	const [onEdit, setOnEdit] = useState(false);
-	const [editValue, setEditValue] = useState({});
+	// const [onEdit, setOnEdit] = useState(false);  
+	// const [editValue, setEditValue] = useState({});
 	const navigate = useNavigate();
 
 	const handleOnEdit = (todo) => {
@@ -38,14 +38,14 @@ const List = () => {
 
 	return (
 		<>
-			{!toDoList.length ? (
+			{!todos.length ? (
 				<div>
 					<h2>Congratulations!! You finished all your tasks</h2>
 				</div>
 			) : (
 				<div className="list">
 					<ul>
-						{toDoList.map((todo, index) => {
+						{todos.map((todo, index) => {
 							return (
 								<li key={index}>
 									<label
